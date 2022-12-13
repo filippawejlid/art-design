@@ -1,15 +1,32 @@
-@import 'primevue/resources/themes/lara-light-blue/theme.css';
-@import 'primevue/resources/primevue.min.css';
-@import 'primeicons/primeicons.css';
-@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=La+Belle+Aurore&display=swap');
-
-body{
-    background-color: $base-background;
-    margin: 0px;
+@import "primevue/resources/themes/lara-light-blue/theme.css";
+@import "primevue/resources/primevue.min.css";
+@import "primeicons/primeicons.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Julius+Sans+One&family=Satisfy&display=swap");
+body {
+  background-color: $base-background;
+  margin: 0px;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    transition: 0.2s;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: $base-font;
+}
+
+*:hover {
+  transition: 0.2s;
+}
+
+.p-menubar {
+  border-radius: 0px;
+
+  .pi {
+    font-size: 1.5rem;
+  }
+
+  .pi-shopping-cart {
+    font-size: 1.1rem !important;
+    cursor: pointer;
+    margin: 0px 15px;
+  }
 }

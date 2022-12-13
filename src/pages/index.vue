@@ -35,7 +35,6 @@ import Button from "primevue/button";
     .btn {
       width: 250px;
       cursor: pointer;
-      font-family: $base-font;
       font-size: large;
       padding: 20px;
       border: none;
@@ -61,7 +60,6 @@ import Button from "primevue/button";
     @include flex(row, center, center);
 
     h1 {
-      font-family: $base-font;
       font-weight: 100;
       color: white;
       font-size: 2.5rem;
