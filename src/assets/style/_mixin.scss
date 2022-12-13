@@ -1,7 +1,31 @@
 @mixin flex($dir, $jc, $ai, $gap: 0) {
-    display: flex;
-    flex-direction: $dir;
-    justify-content: $jc;
-    align-items: $ai;
-    gap: $gap;
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $jc;
+  align-items: $ai;
+  gap: $gap;
+}
+
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
   }
+}
+
+@mixin tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop-xl {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
