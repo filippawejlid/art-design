@@ -4,7 +4,10 @@
       <i @click="openCart()" class="pi pi-shopping-cart"></i>
     </template>
     <template #end>
-      <div class="logo">Art & Design</div>
+      <div class="logo">
+        <p>Art & Design</p>
+        <span>Diana Bellange</span>
+      </div>
     </template>
   </Menubar>
 
@@ -50,8 +53,18 @@ const openCart = () => {
   padding: 10px 10px;
   @include flex(row, space-between, center);
   .logo {
-    font-family: $cursive;
-    font-size: 2rem;
+    position: relative;
+    @include flex(column, center, center);
+    p {
+      font-family: $cursive;
+      font-size: 2rem;
+    }
+    span {
+      position: absolute;
+      font-size: 0.7rem;
+      bottom: -3px;
+      left: 22px;
+    }
   }
 }
 </style>
