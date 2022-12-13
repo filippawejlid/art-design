@@ -29,8 +29,9 @@ import Button from "primevue/button";
 
   .btn-container {
     width: 100%;
-    padding: 90px 0px 0px 90px;
-    @include flex(row, flex-start, flex-start);
+    @include flex(row, center, center);
+    padding: 70px;
+
     .btn {
       width: 250px;
       cursor: pointer;
@@ -46,19 +47,29 @@ import Button from "primevue/button";
         transform: scale(105%);
       }
     }
+
+    @include desktop() {
+      padding: 90px 0px 0px 90px;
+      @include flex(row, flex-start, flex-start);
+    }
   }
 
   .text-container {
     width: 100%;
-    padding: 0px 90px 90px 0px;
+    padding: 70px 0px;
 
-    @include flex(row, flex-end, flex-end);
+    @include flex(row, center, center);
 
     h1 {
       font-family: $base-font;
       font-weight: 100;
       color: white;
       font-size: 2.5rem;
+    }
+
+    @include desktop() {
+      padding: 0px 90px 90px 0px;
+      @include flex(row, flex-end, flex-end);
     }
   }
 }
