@@ -25,11 +25,11 @@
 
 <style lang="scss" scoped>
 .footer {
-  position: absolute;
-  bottom: 0;
+  border: 1px solid #dee2e6;
+  position: relative;
   background-color: white;
-  width: 100vw;
   padding: 30px;
+  // margin-top: 30px;
   @include flex(column, center, center, 2rem);
   &-text {
     font-family: $secondary-font;
