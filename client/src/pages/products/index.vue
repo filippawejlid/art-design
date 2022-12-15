@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="text" @click="click">
+    <div class="text">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id accusantium
       ipsa corrupti numquam sint recusandae ullam tempore eaque, repudiandae
       placeat quisquam quod mollitia, similique quam, delectus inventore vitae
@@ -28,31 +28,55 @@
     </div>
   </div>
 
-  <Dialog v-model:visible="display" :style="{ width: '100vw' }" :modal="true">
+  <Dialog v-model:visible="display" :modal="true">
     <div class="modal">
-      <div class="img-container">
-        <img
-          :src="displayProduct.img"
-          alt="Bild på '{{displayProduct.name}}'"
-        />
+      <div class="content">
+        <div class="img-container">
+          <img
+            :src="displayProduct.img"
+            alt="Bild på '{{displayProduct.name}}'"
+          />
+        </div>
+        <div class="info-container">
+          <div class="info">
+            <p class="name">{{ displayProduct.name }}</p>
+            <p class="price">{{ displayProduct.price }}kr</p>
+          </div>
+          <div class="desc">{{ displayProduct.description }}</div>
+        </div>
       </div>
-      <div class="info">
-        <p class="name">{{ displayProduct.name }}</p>
-        <p class="price">{{ displayProduct.price }}</p>
-      </div>
-      <div class="desc">{{ displayProduct.description }}</div>
     </div>
     <template #footer>
-      <div>add</div>
+      <div>
+        <Button
+          label="Lägg till i varukorgen"
+          icon="pi pi-plus"
+          iconPos="right"
+          class="button"
+          @click="addToCart(displayProduct)"
+        />
+      </div>
     </template>
   </Dialog>
 </template>
 
 <script setup lang="ts">
-import { products } from "../../../products";
+import Button from "primevue/button";
+import { computed, ref, watch } from "vue";
+import useProducts from "../../composables/useProducts";
 import { Product } from "../../models/Product";
-import { ref } from "vue";
-import useApi from "../../services/useApi";
+import { useCartStore } from "../../stores/cartStore";
+import { useProductsStore } from "../../stores/productsStore";
+
+useProducts();
+
+const productsStore = useProductsStore();
+const cartStore = useCartStore();
+const products = computed(() => productsStore.getProducts);
+
+watch(cartStore.cart, (c, o) => {
+  console.log(c);
+});
 
 let display = ref(false);
 
@@ -63,12 +87,9 @@ const openProduct = (product: Product) => {
   display.value = true;
 };
 
-const click = () => {
-  useApi()
-    .get("/")
-    .then((res) => {
-      console.log(res.data);
-    });
+const addToCart = (addedProduct: Product) => {
+  console.log(cartStore.getCart);
+  cartStore.setNewProduct(addedProduct);
 };
 </script>
 
@@ -151,11 +172,70 @@ const click = () => {
 }
 
 .modal {
-  .img-container {
-    width: 90%;
-    img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include desktop() {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .content {
+    @include flex(column, space-evenly, center, 1rem);
+    width: 300px;
+
+    @include desktop() {
+      @include flex(row, space-evenly, flex-start, 3rem);
       width: 100%;
     }
+    .img-container {
+      width: 100%;
+
+      @include desktop() {
+        width: 50%;
+      }
+      img {
+        width: 100%;
+      }
+    }
+
+    .info-container {
+      @include flex(column, flex-start, flex-start, 2rem);
+
+      width: 100%;
+
+      @include desktop() {
+        width: 50%;
+      }
+      .info {
+        width: 100%;
+        @include flex(row, space-between, flex-start);
+
+        @include desktop() {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .name,
+        .price {
+          font-size: larger;
+          font-weight: bold;
+          font-family: $secondary-font;
+        }
+      }
+      .desc {
+        font-family: $secondary-font;
+      }
+    }
+  }
+}
+:deep(.p-button) {
+  background: $base-brown;
+  border: 1px solid $darker-brown;
+
+  &:focus,
+  &:hover {
+    background: $darker-brown;
+    border: 1px solid white;
   }
 }
 </style>

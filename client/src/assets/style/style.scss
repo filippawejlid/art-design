@@ -33,3 +33,25 @@ body {
     margin: 0px 15px;
   }
 }
+
+.p-dialog-content {
+  padding: 1.5rem !important;
+}
+
+.p-dialog-footer {
+  padding: 1.5rem !important;
+  text-align: center !important;
+}
+
+.p-dialog {
+  width: 100vw !important;
+  @include tablet() {
+    width: 90vw !important;
+  }
+  @include desktop() {
+    width: 80vw !important;
+  }
+  @include desktop-xl() {
+    width: 40vw !important;
+  }
+}

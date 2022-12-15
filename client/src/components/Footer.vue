@@ -46,7 +46,7 @@
     i {
       font-size: 2rem;
       cursor: pointer;
-      color: $base-background;
+      color: $base-brown;
     }
   }
 

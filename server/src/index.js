@@ -35,6 +35,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
+const startRoutes = require("./routes/start-routes.js");
+const productsRoute = require("./routes/products-routes.js");
 
 const port = process.env.PORT;
 const app = express();
@@ -43,11 +45,10 @@ app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.use("/", startRoutes);
+app.use("/", productsRoute);
+app.get("/", async (req, res) => {
   console.log("hallå");
-  res.send({
-    msg: "Hello World",
-  });
 });
 
 app.listen(port || 8000, () => {
