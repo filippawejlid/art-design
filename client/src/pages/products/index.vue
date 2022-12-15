@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="text">
+    <div class="text" @click="click">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id accusantium
       ipsa corrupti numquam sint recusandae ullam tempore eaque, repudiandae
       placeat quisquam quod mollitia, similique quam, delectus inventore vitae
@@ -52,6 +52,7 @@
 import { products } from "../../../products";
 import { Product } from "../../models/Product";
 import { ref } from "vue";
+import useApi from "../../services/useApi";
 
 let display = ref(false);
 
@@ -60,6 +61,14 @@ const displayProduct = ref(new Product());
 const openProduct = (product: Product) => {
   displayProduct.value = product;
   display.value = true;
+};
+
+const click = () => {
+  useApi()
+    .get("/")
+    .then((res) => {
+      console.log(res.data);
+    });
 };
 </script>
 
