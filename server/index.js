@@ -1,5 +1,6 @@
 require("dotenv").config();
 require("./mongoose");
+const { required } = require("@vuelidate/validators");
 const express = require("express");
 const nodemailer = require("nodemailer");
 

@@ -1,4 +1,4 @@
-import { Product } from "./../src/models/Product";
+import { Product } from "./src/models/Product";
 export const products: Product[] = [
   {
     name: "Namn på tavla 1",
@@ -7,6 +7,7 @@ export const products: Product[] = [
     price: 199,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 
   {
@@ -16,6 +17,7 @@ export const products: Product[] = [
     price: 299,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 
   {
@@ -25,6 +27,7 @@ export const products: Product[] = [
     price: 399,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 
   {
@@ -34,6 +37,7 @@ export const products: Product[] = [
     price: 499,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 
   {
@@ -43,6 +47,7 @@ export const products: Product[] = [
     price: 599,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 
   {
@@ -52,6 +57,7 @@ export const products: Product[] = [
     price: 699,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 
   {
@@ -61,6 +67,7 @@ export const products: Product[] = [
     price: 799,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 
   {
@@ -70,6 +77,7 @@ export const products: Product[] = [
     price: 899,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 
   {
@@ -79,5 +87,6 @@ export const products: Product[] = [
     price: 999,
     quantity: 0,
     stock: 20,
+    description: "Beskrivning",
   },
 ];

@@ -10,7 +10,12 @@
     </div>
     <h1>Tavlor</h1>
     <div class="products">
-      <div class="product" v-for="product in products" :key="product.id">
+      <div
+        class="product"
+        v-for="product in products"
+        :key="product.id"
+        @click="openProduct(product)"
+      >
         <div class="img-container">
           <img :src="product.img" alt="Bild av tavla" />
         </div>
@@ -22,10 +27,40 @@
       </div>
     </div>
   </div>
+
+  <Dialog v-model:visible="display" :style="{ width: '100vw' }" :modal="true">
+    <div class="modal">
+      <div class="img-container">
+        <img
+          :src="displayProduct.img"
+          alt="Bild på '{{displayProduct.name}}'"
+        />
+      </div>
+      <div class="info">
+        <p class="name">{{ displayProduct.name }}</p>
+        <p class="price">{{ displayProduct.price }}</p>
+      </div>
+      <div class="desc">{{ displayProduct.description }}</div>
+    </div>
+    <template #footer>
+      <div>add</div>
+    </template>
+  </Dialog>
 </template>
 
 <script setup lang="ts">
-import { products } from "../../../api/products";
+import { products } from "../../../products";
+import { Product } from "../../models/Product";
+import { ref } from "vue";
+
+let display = ref(false);
+
+const displayProduct = ref(new Product());
+
+const openProduct = (product: Product) => {
+  displayProduct.value = product;
+  display.value = true;
+};
 </script>
 
 <style scoped lang="scss">
@@ -57,42 +92,32 @@ import { products } from "../../../api/products";
   }
 
   .products {
-    @include flex(row, space-between, flex-start, 2rem);
+    @include flex(row, space-between, flex-start, 1rem);
     flex-wrap: wrap;
 
     .product {
       cursor: pointer;
-      margin: 5px;
-      width: 40%;
-
-      // @include tablet() {
-      //   width: 25%;
-      // }
+      width: 47%;
+      @include tablet() {
+      }
 
       @include desktop() {
-        width: 25%;
+        width: 30%;
       }
 
       @include desktop-xl() {
         width: 20%;
-        // padding: 20px;
       }
       .img-container {
         width: 100%;
         img {
-          border-radius: 10px;
           width: 100%;
-          height: 200px;
-          object-fit: cover;
 
           @include tablet() {
-            height: 280px;
           }
           @include desktop() {
-            height: 320px;
           }
           @include desktop-xl() {
-            max-height: 370px;
           }
         }
       }
@@ -112,6 +137,15 @@ import { products } from "../../../api/products";
           text-overflow: ellipsis;
         }
       }
+    }
+  }
+}
+
+.modal {
+  .img-container {
+    width: 90%;
+    img {
+      width: 100%;
     }
   }
 }
