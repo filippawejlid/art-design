@@ -1,6 +1,6 @@
 export interface ProductResponse {
   name: string;
-  id: string;
+  _id: string;
   img: string;
   price: number;
   stock: number;

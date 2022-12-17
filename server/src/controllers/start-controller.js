@@ -9,7 +9,11 @@ exports.setProducts = async (req, res, next) => {
     description: req.body.description,
   });
 
-  await product.save();
-
-  res.send(product);
+  let existingProduct = await ProductModel.findOne({ name: product.name });
+  if (existingProduct) {
+    res.send({});
+  } else {
+    await product.save();
+    res.send(product);
+  }
 };

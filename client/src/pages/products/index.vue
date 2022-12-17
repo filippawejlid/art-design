@@ -13,7 +13,7 @@
       <div
         class="product"
         v-for="product in products"
-        :key="product.id"
+        :key="product._id"
         @click="openProduct(product)"
       >
         <div class="img-container">
@@ -29,23 +29,7 @@
   </div>
 
   <Dialog v-model:visible="display" :modal="true">
-    <div class="modal">
-      <div class="content">
-        <div class="img-container">
-          <img
-            :src="displayProduct.img"
-            alt="Bild på '{{displayProduct.name}}'"
-          />
-        </div>
-        <div class="info-container">
-          <div class="info">
-            <p class="name">{{ displayProduct.name }}</p>
-            <p class="price">{{ displayProduct.price }}kr</p>
-          </div>
-          <div class="desc">{{ displayProduct.description }}</div>
-        </div>
-      </div>
-    </div>
+    <ProductModal :product="displayProduct"></ProductModal>
     <template #footer>
       <div>
         <Button
@@ -63,6 +47,7 @@
 <script setup lang="ts">
 import Button from "primevue/button";
 import { computed, ref, watch } from "vue";
+import ProductModal from "../../components/ProductModal.vue";
 import useProducts from "../../composables/useProducts";
 import { Product } from "../../models/Product";
 import { useCartStore } from "../../stores/cartStore";
@@ -89,7 +74,7 @@ const openProduct = (product: Product) => {
 
 const addToCart = (addedProduct: Product) => {
   console.log(cartStore.getCart);
-  cartStore.setNewProduct(addedProduct);
+  cartStore.addProduct(addedProduct);
 };
 </script>
 
@@ -142,12 +127,15 @@ const addToCart = (addedProduct: Product) => {
         width: 100%;
         img {
           width: 100%;
+          height: 250px;
+          object-fit: cover;
 
           @include tablet() {
           }
           @include desktop() {
           }
           @include desktop-xl() {
+            height: 300px;
           }
         }
       }
@@ -168,74 +156,6 @@ const addToCart = (addedProduct: Product) => {
         }
       }
     }
-  }
-}
-
-.modal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @include desktop() {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .content {
-    @include flex(column, space-evenly, center, 1rem);
-    width: 300px;
-
-    @include desktop() {
-      @include flex(row, space-evenly, flex-start, 3rem);
-      width: 100%;
-    }
-    .img-container {
-      width: 100%;
-
-      @include desktop() {
-        width: 50%;
-      }
-      img {
-        width: 100%;
-      }
-    }
-
-    .info-container {
-      @include flex(column, flex-start, flex-start, 2rem);
-
-      width: 100%;
-
-      @include desktop() {
-        width: 50%;
-      }
-      .info {
-        width: 100%;
-        @include flex(row, space-between, flex-start);
-
-        @include desktop() {
-          flex-direction: column;
-          gap: 1rem;
-        }
-        .name,
-        .price {
-          font-size: larger;
-          font-weight: bold;
-          font-family: $secondary-font;
-        }
-      }
-      .desc {
-        font-family: $secondary-font;
-      }
-    }
-  }
-}
-:deep(.p-button) {
-  background: $base-brown;
-  border: 1px solid $darker-brown;
-
-  &:focus,
-  &:hover {
-    background: $darker-brown;
-    border: 1px solid white;
   }
 }
 </style>

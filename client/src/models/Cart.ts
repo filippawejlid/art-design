@@ -6,12 +6,6 @@ export class Cart {
 
   constructor() {
     this.products = [];
-    this.totalAmount = getSum(this.products);
+    this.totalAmount = 0;
   }
 }
-
-const getSum = (products: Product[]) => {
-  const prices = products.map((p) => p.price * p.quantity);
-
-  return prices.reduce((partialSum, a) => partialSum + a, 0);
-};

@@ -1,7 +1,5 @@
 import { useQuery } from "vue-query";
-import { ProductResponse } from "../../models/apiInterface";
 import { Product } from "../../models/Product";
-import axios from "axios";
 import useApi from "../../services/useApi";
 
 const useProductsQuery = () => {

@@ -21,33 +21,39 @@ export const useCartStore = defineStore("Cart", {
     },
   },
   actions: {
-    setNewProduct(product: Product) {
-      const found = this.cart.products.find((p) => p.id === product.id);
+    addProduct(product: Product) {
+      const found = this.cart.products.find((p) => p._id === product._id);
+
       if (found) {
         found.quantity++;
-        const index = this.cart.products.findIndex((p) => p.id === found.id);
-        this.cart.products.splice(1, index, found);
+        const index = this.cart.products.findIndex((p) => p._id === found._id);
+        this.cart.products.splice(index, 1, found);
       } else {
-        product.quantity++;
         this.cart.products.push(product);
       }
+      this.cart.totalAmount = updateAmount(this.cart.products);
     },
     removeProduct(product: Product) {
-      const index = this.cart.products.findIndex((p) => p.id === product.id);
-      if (!index) return;
-      console.log(
-        "innan",
-        this.cart.products.find((p) => p.id === product.id)?.quantity
-      );
+      const index = this.cart.products.findIndex((p) => p._id === product._id);
+      console.log("men hallå");
 
-      this.cart.products.splice(1, index, {
-        ...product,
-        quantity: product.quantity - 1,
-      });
-      console.log(
-        "efter",
-        this.cart.products.find((p) => p.id === product.id)?.quantity
-      );
+      if (this.cart.products[index].quantity === 1) {
+        console.log("1");
+
+        this.cart.products.splice(index, 1);
+      } else {
+        console.log("mer");
+
+        this.cart.products[index].quantity--;
+      }
+
+      this.cart.totalAmount = updateAmount(this.cart.products);
     },
   },
 });
+
+const updateAmount = (products: Product[]) => {
+  const prices = products.map((p) => p.price * p.quantity);
+
+  return prices.reduce((partialSum, a) => partialSum + a, 0);
+};
