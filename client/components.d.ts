@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     Cart: typeof import('./src/components/Cart.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
+    PaymentForm: typeof import('./src/components/PaymentForm.vue')['default']
     ProductModal: typeof import('./src/components/ProductModal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

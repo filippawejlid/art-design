@@ -6,6 +6,8 @@ import NotFound from "../src/pages/NotFound.vue";
 import PrimeVue from "primevue/config";
 import Tooltip from "primevue/tooltip";
 import Dialog from "primevue/dialog";
+import ToastService from "primevue/toastservice";
+
 import { createRouter, createWebHistory } from "vue-router";
 
 import { setupLayouts } from "virtual:generated-layouts";
@@ -27,7 +29,7 @@ router.beforeEach((to, from) => {
 });
 
 const app = createApp(App);
-app.use(PrimeVue).use(pinia).use(router);
+app.use(PrimeVue).use(ToastService).use(pinia).use(router);
 app.directive("tooltip", Tooltip);
 
 app.component("Dialog", Dialog);

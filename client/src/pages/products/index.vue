@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-
+  <Toast />
   <Dialog v-model:visible="display" :modal="true">
     <ProductModal :product="displayProduct"></ProductModal>
     <template #footer>
@@ -46,6 +46,8 @@
 
 <script setup lang="ts">
 import Button from "primevue/button";
+import { useToast } from "primevue/usetoast";
+import Toast from "primevue/toast";
 import { computed, ref, watch } from "vue";
 import ProductModal from "../../components/ProductModal.vue";
 import useProducts from "../../composables/useProducts";
@@ -53,15 +55,12 @@ import { Product } from "../../models/Product";
 import { useCartStore } from "../../stores/cartStore";
 import { useProductsStore } from "../../stores/productsStore";
 
+const toast = useToast();
 useProducts();
 
 const productsStore = useProductsStore();
 const cartStore = useCartStore();
 const products = computed(() => productsStore.getProducts);
-
-watch(cartStore.cart, (c, o) => {
-  console.log(c);
-});
 
 let display = ref(false);
 
@@ -73,29 +72,21 @@ const openProduct = (product: Product) => {
 };
 
 const addToCart = (addedProduct: Product) => {
-  console.log(cartStore.getCart);
   cartStore.addProduct(addedProduct);
+  showAddSuccess();
+};
+
+const showAddSuccess = () => {
+  toast.add({
+    severity: "success",
+    summary: "Produkten tillagd i varukorgen",
+    life: 3000,
+  });
 };
 </script>
 
 <style scoped lang="scss">
 .main {
-  padding: 20px;
-  background-color: white;
-  box-shadow: 5px 0 5px -5px rgba(179, 179, 179, 0.7),
-    -5px 0 5px -5px rgba(181, 181, 181, 0.7);
-  @include flex(column, flex-start, center, 2rem);
-
-  @include tablet() {
-    margin: 0px 30px;
-  }
-  @include desktop() {
-    margin: 0px 100px;
-  }
-
-  @include desktop-xl() {
-    margin: 0px 200px;
-  }
   .text {
     font-family: $secondary-font;
     text-align: center;
@@ -107,10 +98,11 @@ const addToCart = (addedProduct: Product) => {
   }
 
   .products {
-    @include flex(row, space-between, flex-start, 1rem);
+    @include flex(row, space-between, flex-start, 0rem);
     flex-wrap: wrap;
 
     .product {
+      margin-bottom: 50px;
       cursor: pointer;
       width: 47%;
       @include tablet() {
@@ -121,7 +113,7 @@ const addToCart = (addedProduct: Product) => {
       }
 
       @include desktop-xl() {
-        width: 20%;
+        width: 23%;
       }
       .img-container {
         width: 100%;
@@ -130,12 +122,8 @@ const addToCart = (addedProduct: Product) => {
           height: 250px;
           object-fit: cover;
 
-          @include tablet() {
-          }
-          @include desktop() {
-          }
-          @include desktop-xl() {
-            height: 300px;
+          @include desktop-xxl() {
+            height: 380px;
           }
         }
       }

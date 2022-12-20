@@ -1,12 +1,7 @@
 <template>
   <div class="landing-page">
     <div class="btn-container">
-      <router-link
-        class="link-button"
-        v-slot="{ navigate }"
-        custom
-        :to="'/products'"
-      >
+      <router-link v-slot="{ navigate }" custom :to="'/products'">
         <button class="btn" @click="navigate">Vidare till konsten</button>
       </router-link>
     </div>

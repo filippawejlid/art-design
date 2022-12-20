@@ -10,12 +10,7 @@
       <i class="pi pi-facebook"></i>
       <i class="pi pi-twitter"></i>
     </div>
-    <router-link
-      class="link-button"
-      v-slot="{ navigate }"
-      custom
-      :to="'/login'"
-    >
+    <router-link v-slot="{ navigate }" custom :to="'/login'">
       <p class="link" @click="navigate">Logga in</p>
     </router-link>
   </div>

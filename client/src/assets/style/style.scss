@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Julius+Sans+One&family=Satisfy&display=swap");
 body {
   // background-color: $base-background;
-  //   background-image: url("../bg.png");
+  background-image: url("../bg5.png");
   background-color: rgb(238, 232, 235);
   margin: 0px;
 }
@@ -20,6 +20,25 @@ body {
   transition: 0.2s;
 }
 
+.main {
+  padding: 20px;
+  background-color: white;
+  box-shadow: 5px 0 5px -5px rgba(179, 179, 179, 0.7),
+    -5px 0 5px -5px rgba(181, 181, 181, 0.7);
+  @include flex(column, flex-start, center, 2rem);
+
+  @include tablet() {
+    margin: 0px 30px;
+  }
+  @include desktop() {
+    margin: 0px 100px;
+  }
+
+  @include desktop-xl() {
+    margin: 0px 200px;
+  }
+}
+
 .p-menubar {
   border-radius: 0px;
 
@@ -30,7 +49,6 @@ body {
   .pi-shopping-cart {
     font-size: 1.1rem !important;
     cursor: pointer;
-    margin: 0px 15px;
   }
 }
 
@@ -55,13 +73,41 @@ body {
     width: 40vw !important;
   }
 }
+
+.cart-dialog {
+  @include tablet() {
+    width: 70vw !important;
+  }
+  @include desktop() {
+    width: 40vw !important;
+  }
+  @include desktop-xl() {
+    width: 28vw !important;
+  }
+}
 .p-button {
   background: $base-brown;
   border: 1px solid $darker-brown;
 
   &:focus,
   &:hover {
-    background: $darker-brown;
-    border: 1px solid white;
+    background: $darker-brown !important;
+    border: 1px solid white !important;
+  }
+}
+
+.p-toast-message {
+  background: white;
+  border: solid #fff !important;
+  border-width: 0 0 0 6px !important;
+  .p-toast-message-content {
+    background: $base-brown;
+    border: 1px solid $darker-brown;
+    .p-toast-summary {
+      color: white;
+    }
+    span {
+      color: white !important;
+    }
   }
 }

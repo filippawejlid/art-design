@@ -11,14 +11,30 @@
     </template>
   </Menubar>
 
-  <Dialog v-model:visible="display" :modal="true" :header="'Varukorg'">
+  <Dialog
+    class="cart-dialog"
+    v-model:visible="display"
+    :modal="true"
+    :header="'Varukorg'"
+  >
     <div class="cart-products">
       <Cart :products="cart.products"></Cart>
     </div>
     <template #footer>
       <div class="footer" v-if="cart.totalAmount > 0">
         <div class="total">Totalsumma: {{ cart.totalAmount }}kr</div>
-        <Button label="Gå till kassan" class="button" />
+        <router-link v-slot="{ navigate }" custom :to="'/checkout'">
+          <Button
+            @click="
+              () => {
+                navigate();
+                display = false;
+              }
+            "
+            label="Gå till kassan"
+            class="button"
+          />
+        </router-link>
       </div>
     </template>
   </Dialog>
@@ -62,6 +78,15 @@ const cart = computed(() => cartStore.getCart);
   background-color: white;
   padding: 10px 10px;
   @include flex(row, space-between, center);
+
+  .pi {
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+
+    &:hover {
+      background: #e9ecef;
+    }
+  }
   .logo {
     position: relative;
     @include flex(column, center, center);
@@ -85,6 +110,13 @@ const cart = computed(() => cartStore.getCart);
   .total {
     font-family: $secondary-font;
     margin-bottom: 20px;
+  }
+}
+
+.cart-dialog,
+.p-dialog {
+  @include tablet() {
+    width: 30vw !important;
   }
 }
 </style>

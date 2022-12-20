@@ -1,5 +1,10 @@
 <template>
-  <div v-if="products.length" class="product" v-for="product in products">
+  <div
+    v-if="products.length"
+    class="product"
+    v-for="product in products"
+    :key="product._id"
+  >
     <div class="img">
       <img :src="product.img" alt="" />
     </div>
@@ -42,7 +47,6 @@ const cartStore = useCartStore();
 
 const decrease = (product: Product) => {
   cartStore.removeProduct(product);
-  console.log("halå");
 };
 
 const increase = (product: Product) => {
@@ -51,6 +55,9 @@ const increase = (product: Product) => {
 </script>
 
 <style scoped lang="scss">
+* {
+  font-family: $secondary-font;
+}
 .product {
   position: relative;
   @include flex(row, space-evenly, flex-start, 2rem);
@@ -64,14 +71,21 @@ const increase = (product: Product) => {
   }
 
   .container {
-    height: 100%;
-    @include flex(column, space-between, center, 1rem);
+    height: 200px;
+    @include flex(column, space-between, flex-end, 1rem);
 
     .info {
+      @include flex(column, space-between, flex-end, 1rem);
+      width: 100%;
+
+      .name {
+        // font-family: $base-font;
+      }
+      .price {
+        font-weight: bold;
+      }
     }
     .edit {
-      position: absolute;
-      bottom: 0;
       @include flex(row, flex-start, center, 1rem);
       .quantity {
         font-size: 1.2rem;
