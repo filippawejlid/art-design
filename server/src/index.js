@@ -23,7 +23,6 @@ app.use("/", startRoutes);
 app.use("/products", productsRoute);
 app.use("/checkout", checkoutRoute);
 app.get("/", async (req, res) => {
-  s;
   console.log("hallå");
 });
 
