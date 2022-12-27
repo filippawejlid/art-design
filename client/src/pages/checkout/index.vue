@@ -12,22 +12,41 @@
         </div>
         <p class="sum">Totalsumma</p>
       </div>
-      <PaymentForm></PaymentForm>
+      <PaymentForm @getCustomerInfo="sendOrder"></PaymentForm>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from "vue";
-import { useCartStore } from "../../stores/cartStore";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
 import Cart from "../../components/Cart.vue";
-import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
 import PaymentForm from "../../components/PaymentForm.vue";
+import useOrderQuery from "../../composables/queries/useOrderQuery";
+import { Customer } from "../../models/Customer";
+import { useCartStore } from "../../stores/cartStore";
 
+const { postOrder } = useOrderQuery();
 const cartStore = useCartStore();
 
 const cart = computed(() => cartStore.getCart);
+
+const router = useRouter();
+
+const sendOrder = (customer: Customer) => {
+  const order = {
+    _id: "",
+    customer: customer,
+    products: cart.value.products,
+    totalAmount: cart.value.totalAmount,
+  };
+
+  postOrder.mutateAsync(order).then((data) => {
+    //TÖM CART
+    console.log("data", data);
+    router.push(`/checkout/${data.data._id}/confirmation`);
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -38,8 +57,6 @@ const cart = computed(() => cartStore.getCart);
     padding: 20px;
     width: 100%;
     @include flex(column, space-evenly, center, 2rem);
-    .product {
-    }
   }
 }
 

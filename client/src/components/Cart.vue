@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="products.length"
+    v-if="products?.length"
     class="product"
     v-for="product in products"
     :key="product._id"
@@ -38,7 +38,7 @@ import Button from "primevue/button";
 import { useCartStore } from "../stores/cartStore";
 
 interface Props {
-  products: Product[];
+  products?: Product[];
 }
 
 defineProps<Props>();

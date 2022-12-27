@@ -9,10 +9,11 @@ const cors = require("cors");
 const morgan = require("morgan");
 const startRoutes = require("./routes/start-routes.js");
 const productsRoute = require("./routes/products-routes.js");
-const checkoutRoute = require("./routes/products-routes.js");
+const checkoutRoute = require("./routes/checkout-routes.js");
 
 const port = process.env.PORT;
 const app = express();
+//wofhayeljtpfrrml
 
 app.use(morgan("combined"));
 app.use(bodyParser.json());
@@ -22,6 +23,7 @@ app.use("/", startRoutes);
 app.use("/products", productsRoute);
 app.use("/checkout", checkoutRoute);
 app.get("/", async (req, res) => {
+  s;
   console.log("hallå");
 });
 

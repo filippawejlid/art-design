@@ -1,10 +1,6 @@
 import Api from "./Api";
 
 const useApi = () => {
-  //   register(credentials: any) {
-  //     return Api().post("register", credentials);
-  //   },
-
   const get = (url: string) => {
     return Api().get(url);
   };
@@ -29,7 +25,3 @@ const useApi = () => {
   };
 };
 export default useApi;
-// AuthenticationService.register({
-//     email: 'test',
-//     pass: '123'
-// })

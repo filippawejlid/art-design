@@ -1,3 +1,5 @@
+import { Product } from "./Product";
+
 export interface ProductResponse {
   name: string;
   _id: string;
@@ -5,4 +7,14 @@ export interface ProductResponse {
   price: number;
   stock: number;
   description: string;
+}
+export interface OrderResponse {
+  _id: string;
+  customer: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  products: Product[];
+  totalAmount: number;
 }

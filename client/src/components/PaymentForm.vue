@@ -126,13 +126,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, onMounted, watch } from "vue";
-import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
-import Checkbox from "primevue/checkbox";
-import InputText from "primevue/inputtext";
-import InputMask from "primevue/inputmask";
+import { email, required } from "@vuelidate/validators";
 import Button from "primevue/button";
+import Checkbox from "primevue/checkbox";
+import InputMask from "primevue/inputmask";
+import InputText from "primevue/inputtext";
+import { reactive } from "vue";
+import { Customer } from "../models/Customer";
 
 const state = reactive({
   customer: { firstName: "", lastName: "", email: "" },
@@ -159,6 +160,8 @@ const rules = {
   accept: { required },
 };
 
+const emit = defineEmits(["getCustomerInfo"]);
+
 const v$ = useVuelidate(rules, state);
 
 const handleSubmit = async () => {
@@ -166,7 +169,7 @@ const handleSubmit = async () => {
   console.log(state.accept);
   if (!isValid) return;
 
-  const order = {};
+  emit("getCustomerInfo", state.customer);
 };
 </script>
 
