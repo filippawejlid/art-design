@@ -6,7 +6,7 @@
 import { watchEffect } from "vue";
 import { QueryCache, useQueryProvider } from "vue-query";
 import { RouterView } from "vue-router";
-import { products } from "../products";
+import { products } from "./services/ProductsService";
 import useApi from "./services/useApi";
 
 watchEffect(() => {

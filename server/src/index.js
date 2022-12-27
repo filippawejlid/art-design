@@ -1,7 +1,4 @@
-// require("dotenv").config();
-// require("../mongoose");
 // const { required } = require("@vuelidate/validators");
-// const express = require("express");
 // const nodemailer = require("nodemailer");
 
 require("dotenv").config();
@@ -12,6 +9,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const startRoutes = require("./routes/start-routes.js");
 const productsRoute = require("./routes/products-routes.js");
+const checkoutRoute = require("./routes/products-routes.js");
 
 const port = process.env.PORT;
 const app = express();
@@ -21,7 +19,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/", startRoutes);
-app.use("/", productsRoute);
+app.use("/products", productsRoute);
+app.use("/checkout", checkoutRoute);
 app.get("/", async (req, res) => {
   console.log("hallå");
 });

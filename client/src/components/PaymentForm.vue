@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="field">
-          <div class="p-float-label p-input-icon-right">
+          <span class="p-float-label">
             <InputText
               id="email"
               v-model="state.customer.email"
@@ -44,8 +44,67 @@
             <label for="email" :class="{ 'p-error': v$.customer.email.$error }"
               >Email*</label
             >
+          </span>
+        </div>
+        <br />
+        <div class="field">
+          <div class="p-float-label">
+            <InputMask
+              id="numbers"
+              v-model="state.card.numbers"
+              :hasError="v$.card.numbers.$error"
+              :class="{ 'p-invalid': v$.card.numbers.$error }"
+              mask="9999 9999 9999 9999"
+              slotChar=""
+            />
+            <label for="numbers" :class="{ 'p-error': v$.card.numbers.$error }"
+              >Kortnummer*</label
+            >
           </div>
         </div>
+        <div class="field">
+          <div class="p-float-label">
+            <InputText
+              id="name"
+              v-model="state.card.name"
+              :hasError="v$.card.name.$error"
+              :class="{ 'p-invalid': v$.card.name.$error }"
+            />
+            <label for="name" :class="{ 'p-error': v$.card.name.$error }"
+              >Namn på kort*</label
+            >
+          </div>
+        </div>
+        <div class="field">
+          <div class="p-float-label">
+            <InputMask
+              id="date"
+              v-model="state.card.cardDate"
+              :hasError="v$.card.cardDate.$error"
+              :class="{ 'p-invalid': v$.card.cardDate.$error }"
+              mask="99/99"
+            />
+            <label for="date" :class="{ 'p-error': v$.card.cardDate.$error }"
+              >Giltigt till MM/ÅÅ*</label
+            >
+          </div>
+        </div>
+        <div class="field">
+          <div class="p-float-label">
+            <InputMask
+              id="cvc"
+              v-model="state.card.cvc"
+              :hasError="v$.card.cvc.$error"
+              :class="{ 'p-invalid': v$.card.cvc.$error }"
+              mask="999?9"
+              slotChar=""
+            />
+            <label for="cvc" :class="{ 'p-error': v$.card.cvc.$error }"
+              >CVV/CVC*</label
+            >
+          </div>
+        </div>
+
         <div class="field-checkbox">
           <Checkbox
             id="accept"
@@ -72,10 +131,17 @@ import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import Checkbox from "primevue/checkbox";
 import InputText from "primevue/inputtext";
+import InputMask from "primevue/inputmask";
 import Button from "primevue/button";
 
 const state = reactive({
   customer: { firstName: "", lastName: "", email: "" },
+  card: {
+    numbers: undefined,
+    name: "",
+    cardDate: undefined,
+    cvc: undefined,
+  },
   accept: null,
 });
 const rules = {
@@ -83,6 +149,12 @@ const rules = {
     firstName: { required },
     lastName: { required },
     email: { required, email },
+  },
+  card: {
+    numbers: { required },
+    name: { required },
+    cardDate: { required },
+    cvc: { required },
   },
   accept: { required },
 };
@@ -94,7 +166,7 @@ const handleSubmit = async () => {
   console.log(state.accept);
   if (!isValid) return;
 
-  console.log("hej");
+  const order = {};
 };
 </script>
 
