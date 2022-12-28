@@ -12,7 +12,6 @@ import useApi from "./services/useApi";
 watchEffect(() => {
   products.forEach((prod) => {
     useApi().post("/add-base-products", prod);
-    console.log("heheheheh");
   });
 });
 

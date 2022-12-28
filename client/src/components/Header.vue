@@ -18,7 +18,7 @@
     :header="'Varukorg'"
   >
     <div class="cart-products">
-      <Cart :products="cart.products"></Cart>
+      <Cart :showEdit="show" :products="cart.products"></Cart>
     </div>
     <template #footer>
       <div class="footer" v-if="cart.totalAmount > 0">
@@ -48,6 +48,8 @@ import Cart from "./Cart.vue";
 import { computed, ref } from "vue";
 import { useCartStore } from "../stores/cartStore";
 let display = ref(false);
+
+const show = true;
 
 const items = [
   {

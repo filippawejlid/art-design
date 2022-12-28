@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="cart">
-      <Cart :products="cart.products"></Cart>
+      <Cart :showEdit="show" :products="cart.products"></Cart>
     </div>
     <div class="checkout">
       <div class="summary">
@@ -32,6 +32,8 @@ const cartStore = useCartStore();
 const cart = computed(() => cartStore.getCart);
 
 const router = useRouter();
+
+const show = true;
 
 const sendOrder = (customer: Customer) => {
   const order = {

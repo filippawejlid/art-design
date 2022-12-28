@@ -13,7 +13,7 @@
         <div class="name">{{ product.name }}</div>
         <div class="price">{{ product.price }}kr</div>
       </div>
-      <div class="edit">
+      <div class="edit" v-if="showEdit">
         <Button
           class="p-button-outlined p-button-rounded"
           icon="pi pi-minus"
@@ -39,6 +39,7 @@ import { useCartStore } from "../stores/cartStore";
 
 interface Props {
   products?: Product[];
+  showEdit?: boolean;
 }
 
 defineProps<Props>();
@@ -75,12 +76,12 @@ const increase = (product: Product) => {
     @include flex(column, space-between, flex-end, 1rem);
 
     .info {
-      @include flex(column, space-between, flex-end, 1rem);
+      @include flex(column, space-between, flex-start, 1rem);
       width: 100%;
-
-      .name {
-        // font-family: $base-font;
+      @include tablet() {
+        align-items: flex-end;
       }
+
       .price {
         font-weight: bold;
       }

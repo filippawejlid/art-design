@@ -17,37 +17,43 @@ export const useCartStore = defineStore("Cart", {
   },
   getters: {
     getCart(): Cart {
+      // const storedCart = JSON.parse(localStorage.getItem("cart"));
+      // return storedCart;
       return this.cart as Cart;
     },
   },
   actions: {
     addProduct(product: Product) {
       const found = this.cart.products.find((p) => p._id === product._id);
+      console.log(this.cart.products);
+      console.log(product);
 
       if (found) {
         found.quantity++;
+        console.log(found);
+
         const index = this.cart.products.findIndex((p) => p._id === found._id);
         this.cart.products.splice(index, 1, found);
       } else {
         this.cart.products.push(product);
       }
       this.cart.totalAmount = updateAmount(this.cart.products);
+      // localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     removeProduct(product: Product) {
       const index = this.cart.products.findIndex((p) => p._id === product._id);
-      console.log("men hallå");
 
       if (this.cart.products[index].quantity === 1) {
-        console.log("1");
-
         this.cart.products.splice(index, 1);
       } else {
-        console.log("mer");
-
         this.cart.products[index].quantity--;
       }
 
       this.cart.totalAmount = updateAmount(this.cart.products);
+      // localStorage.setItem("cart", JSON.stringify(this.cart));
+    },
+    emptyCart() {
+      // localStorage.removeItem("cart");
     },
   },
 });
