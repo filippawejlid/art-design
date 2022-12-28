@@ -1,4 +1,5 @@
 import { Product } from "src/models/Product";
+
 export const products: Product[] = [
   {
     name: "Brighter times",

@@ -17,9 +17,9 @@ export const useCartStore = defineStore("Cart", {
   },
   getters: {
     getCart(): Cart {
-      // const storedCart = JSON.parse(localStorage.getItem("cart"));
-      // return storedCart;
-      return this.cart as Cart;
+      return (
+        (this.cart as Cart) || JSON.parse(localStorage.getItem("cart") || "[]")
+      );
     },
   },
   actions: {
@@ -38,7 +38,7 @@ export const useCartStore = defineStore("Cart", {
         this.cart.products.push(product);
       }
       this.cart.totalAmount = updateAmount(this.cart.products);
-      // localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     removeProduct(product: Product) {
       const index = this.cart.products.findIndex((p) => p._id === product._id);
@@ -50,10 +50,10 @@ export const useCartStore = defineStore("Cart", {
       }
 
       this.cart.totalAmount = updateAmount(this.cart.products);
-      // localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     emptyCart() {
-      // localStorage.removeItem("cart");
+      localStorage.removeItem("cart");
     },
   },
 });
