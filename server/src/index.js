@@ -10,10 +10,21 @@ const morgan = require("morgan");
 const startRoutes = require("./routes/start-routes.js");
 const productsRoute = require("./routes/products-routes.js");
 const checkoutRoute = require("./routes/checkout-routes.js");
+const multer = require("multer");
 
 const port = process.env.PORT;
 const app = express();
-//wofhayeljtpfrrml
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
+
+const upload = multer({ storage: storage });
 
 app.use(morgan("combined"));
 app.use(bodyParser.json());
