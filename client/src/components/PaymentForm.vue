@@ -2,6 +2,7 @@
   <div class="flex justify-content-center">
     <div class="card">
       <form @submit.prevent="handleSubmit" class="p-fluid">
+        <h3>Personuppgifter</h3>
         <div class="field">
           <div class="p-float-label">
             <InputText
@@ -47,6 +48,8 @@
           </span>
         </div>
         <br />
+        <h3>Betalinformation</h3>
+
         <div class="field">
           <div class="p-float-label">
             <InputMask
@@ -118,7 +121,7 @@
           >
         </div>
         <div class="button-container">
-          <Button type="submit" label="Submit" class="mt-2" />
+          <Button type="submit" label="Betala" class="mt-2" />
         </div>
       </form>
     </div>
@@ -166,7 +169,6 @@ const v$ = useVuelidate(rules, state);
 
 const handleSubmit = async () => {
   const isValid = await v$.value.$validate();
-  console.log(state.accept);
   if (!isValid) return;
 
   emit("getCustomerInfo", state.customer);
@@ -187,6 +189,11 @@ const handleSubmit = async () => {
       margin-top: 15px;
       display: flex;
       justify-content: flex-end;
+    }
+    h3 {
+      margin: 25px 0px;
+      font-weight: normal;
+      font-family: $base-font;
     }
   }
 }

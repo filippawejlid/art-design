@@ -1,19 +1,20 @@
 <template>
   <div class="main">
     <div class="cart">
+      <h2>Varukorg</h2>
       <Cart :showEdit="show" :products="cart.products"></Cart>
-    </div>
-    <div class="checkout">
-      <div class="summary">
-        <p>Ordersammanfattning</p>
-        <div class="order-item" v-for="item in cart.products">
-          <span class="name">{{ item.name }}</span>
-          <span class="price">{{ item.price }}kr</span>
+      <div class="checkout">
+        <div class="summary">
+          <p>Ordersammanfattning</p>
+          <div class="order-item" v-for="item in cart.products">
+            <span class="name"> {{ item.quantity }}x {{ item.name }}</span>
+            <span class="price">{{ item.price * item.quantity }}kr</span>
+          </div>
+          <p class="sum">Totalsumma: {{ cart.totalAmount }}kr</p>
         </div>
-        <p class="sum">Totalsumma</p>
       </div>
-      <PaymentForm @getCustomerInfo="sendOrder"></PaymentForm>
     </div>
+    <PaymentForm @getCustomerInfo="sendOrder"></PaymentForm>
   </div>
 </template>
 
@@ -44,7 +45,7 @@ const sendOrder = (customer: Customer) => {
   };
 
   postOrder.mutateAsync(order).then((data) => {
-    //TÖM CART
+    cartStore.emptyCart();
     console.log("data", data);
     router.push(`/checkout/${data.data._id}/confirmation`);
   });
@@ -53,12 +54,56 @@ const sendOrder = (customer: Customer) => {
 
 <style lang="scss" scoped>
 .main {
-  //   padding: 0px;
+  @include desktop() {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  // @include desktop-xl() {
+  //   margin: 0px 150px;
+  // }
+  // @include desktop-xxl() {
+  //   margin: 0px 350px;
+  // }
+
   .cart {
     border-radius: 5px;
     padding: 20px;
-    width: 100%;
     @include flex(column, space-evenly, center, 2rem);
+    @include desktop() {
+      width: 50%;
+    }
+
+    p {
+      font-weight: normal;
+    }
+  }
+
+  .checkout {
+    padding: 20px;
+    .summary {
+      @include flex(column, flex-start, center, 1rem);
+      * {
+        font-family: $secondary-font;
+      }
+
+      h2 {
+        font-weight: normal;
+        text-align: center;
+        font-family: $base-font;
+      }
+      .order-item {
+        @include flex(row, space-between, center, 1rem);
+        // width: 70%;
+
+        .price {
+        }
+      }
+
+      .sum {
+        font-weight: bold;
+        text-align: center;
+      }
+    }
   }
 }
 

@@ -1,14 +1,19 @@
 <template>
-  <div>
+  <div class="main">
     <h2>Orderbekräftelse</h2>
     <div class="text">
       Vi har nu tagit emot din order
       {{
-        orderId.toLocaleString().substring(orderId.toLocaleString().length - 5)
+        orderId.toLocaleString().substring(orderId.toLocaleString().length - 10)
       }}
     </div>
     <div class="products">
       <Cart :products="confirmationOrder?.products"></Cart>
+    </div>
+    <div class="info">
+      Du kommer inom kort få ett bekräftelsemejl med bekräftelse att vi mottagit
+      din order. Därefter börjar vi hantera din beställning, vid frågor eller
+      funderingar hänvisar vi dig till vår kontaktsida.
     </div>
   </div>
 </template>
@@ -32,4 +37,14 @@ const confirmationOrder = computed(() => order.value);
 console.log(confirmationOrder.value, "hihiihihhihi");
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.main {
+  padding: 50px;
+  .info {
+    font-family: $secondary-font;
+    width: 70%;
+    text-align: center;
+    margin: 50px;
+  }
+}
+</style>

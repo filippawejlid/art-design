@@ -17,9 +17,11 @@ export const useCartStore = defineStore("Cart", {
   },
   getters: {
     getCart(): Cart {
-      return (
-        (this.cart as Cart) || JSON.parse(localStorage.getItem("cart") || "[]")
-      );
+      if (this.cart.products.length > 0) {
+        return this.cart as Cart;
+      } else {
+        return JSON.parse(localStorage.getItem("cart") || "[]");
+      }
     },
   },
   actions: {
@@ -53,6 +55,8 @@ export const useCartStore = defineStore("Cart", {
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     emptyCart() {
+      this.cart.products = [];
+      this.cart.totalAmount = 0;
       localStorage.removeItem("cart");
     },
   },
