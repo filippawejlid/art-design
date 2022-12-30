@@ -136,7 +136,6 @@ import Checkbox from "primevue/checkbox";
 import InputMask from "primevue/inputmask";
 import InputText from "primevue/inputtext";
 import { reactive } from "vue";
-import { Customer } from "../models/Customer";
 
 const state = reactive({
   customer: { firstName: "", lastName: "", email: "" },

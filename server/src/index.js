@@ -10,6 +10,7 @@ const morgan = require("morgan");
 const startRoutes = require("./routes/start-routes.js");
 const productsRoute = require("./routes/products-routes.js");
 const checkoutRoute = require("./routes/checkout-routes.js");
+const adminRoute = require("./routes/admin-routes.js");
 const multer = require("multer");
 
 const port = process.env.PORT;
@@ -33,6 +34,7 @@ app.use(cors());
 app.use("/", startRoutes);
 app.use("/products", productsRoute);
 app.use("/checkout", checkoutRoute);
+app.use("/admin", adminRoute);
 app.get("/", async (req, res) => {
   console.log("hallå");
 });

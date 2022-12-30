@@ -81,15 +81,14 @@ const sendOrder = (customer: Customer) => {
   .checkout {
     padding: 20px;
     .summary {
-      @include flex(column, flex-start, center, 1rem);
+      @include flex(column, flex-start, normal, 1rem);
       * {
         font-family: $secondary-font;
       }
 
-      h2 {
+      p {
         font-weight: normal;
         text-align: center;
-        font-family: $base-font;
       }
       .order-item {
         @include flex(row, space-between, center, 1rem);

@@ -1,3 +1,4 @@
+import { useUserStore } from "./stores/userStore";
 import { createApp } from "vue";
 import "../src/assets/style/style.scss";
 import App from "./App.vue";
@@ -22,10 +23,10 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
-  // const userStore = useUserStore();
-  // if (!userStore.isAdmin && !userStore.isSuperAdmin && to.name === 'portId-date-edit') {
-  //     return { path: to.path.replace('edit', '') };
-  // }
+  const userStore = useUserStore();
+  if (!userStore.isAdmin && to.name === "admin") {
+    return "/";
+  }
 });
 
 const app = createApp(App);
