@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import useOrderQuery from "../../../composables/queries/useOrderQuery";
 import Cart from "../../../components/Cart.vue";
@@ -34,7 +34,9 @@ const { data: order } = useOrderQuery(orderId.toLocaleString());
 
 const confirmationOrder = computed(() => order.value);
 
-console.log(confirmationOrder.value, "hihiihihhihi");
+watch(confirmationOrder, (c, o) => {
+  console.log(c?.products);
+});
 </script>
 
 <style scoped lang="scss">

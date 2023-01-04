@@ -11,6 +11,7 @@
     <div class="container">
       <div class="info">
         <div class="name">{{ product.name }}</div>
+        <div v-if="!showEdit">Antal: {{ product.quantity }}</div>
         <div class="price">{{ product.price }}kr</div>
       </div>
       <div class="edit" v-if="showEdit">

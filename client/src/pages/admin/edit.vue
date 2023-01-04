@@ -16,17 +16,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useProductsStore } from "~/stores/productsStore";
 import Button from "primevue/button";
-import InputText from "primevue/inputtext";
 import InputNumber from "primevue/inputnumber";
-import useProducts from "~/composables/useProducts";
+import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
-import useApi from "~/services/useApi";
+import { computed } from "vue";
 import useProductsQuery from "~/composables/queries/useProductsQuery";
+import useProducts from "~/composables/useProducts";
+import { useProductsStore } from "~/stores/productsStore";
 
-const { addProduct, editProduct, deleteProduct } = useProductsQuery();
+const { editProduct, deleteProduct } = useProductsQuery();
 
 useProducts();
 

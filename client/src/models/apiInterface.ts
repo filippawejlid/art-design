@@ -18,3 +18,14 @@ export interface OrderResponse {
   products: Product[];
   totalAmount: number;
 }
+
+export interface OrdersResponse {
+  _id: string;
+  customer: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  products: Product[];
+  totalAmount: number;
+}

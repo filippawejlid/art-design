@@ -19,8 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRouter } from "vue-router";
+import { Product } from "~/models/Product";
 import Cart from "../../components/Cart.vue";
 import PaymentForm from "../../components/PaymentForm.vue";
 import useOrderQuery from "../../composables/queries/useOrderQuery";
@@ -37,10 +38,18 @@ const router = useRouter();
 const show = true;
 
 const sendOrder = (customer: Customer) => {
+  let orderProducts: Product[] = [];
+
+  cart.value.products.forEach((product) => {
+    for (let index = 0; index < product.quantity; index++) {
+      orderProducts.push(product);
+    }
+  });
+
   const order = {
     _id: "",
     customer: customer,
-    products: cart.value.products,
+    products: orderProducts,
     totalAmount: cart.value.totalAmount,
   };
 

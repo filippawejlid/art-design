@@ -9,7 +9,15 @@ const useOrderQuery = (id?: string) => {
       .get(`checkout/get-order/${id}`)
       .then((res) => {
         console.log(res.data, "hej");
-        return res.data;
+        return new Order(res.data);
+      });
+  };
+  const getAllOrders = (): Promise<OrderResponse> => {
+    return useApi()
+      .get(`checkout/get-all-orders`)
+      .then((res) => {
+        console.log("alla ordrar", res.data);
+        return res.data.map((p: Order) => new Order(p)) ?? [];
       });
   };
   const postOrder = useMutation((order: Order) => {
@@ -17,8 +25,7 @@ const useOrderQuery = (id?: string) => {
   });
 
   return {
-    ...useQuery("order", getOrder, {
-      enabled: !!id,
+    ...useQuery("order", id ? getOrder : getAllOrders, {
       refetchOnWindowFocus: false,
     }),
     postOrder,

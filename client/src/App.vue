@@ -10,9 +10,14 @@ import { products } from "./services/ProductsService";
 import useApi from "./services/useApi";
 
 watchEffect(() => {
-  products.forEach((prod) => {
-    useApi().post("/add-base-products", prod);
-  });
+  const added = JSON.parse(localStorage.getItem("products") || "[]");
+
+  if (added.length) return;
+  else {
+    products.forEach((prod) => {
+      useApi().post("/add-base-products", prod);
+    });
+  }
 });
 
 useQueryProvider({

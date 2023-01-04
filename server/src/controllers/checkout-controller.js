@@ -46,3 +46,11 @@ exports.getOrder = async (req, res, next) => {
 
   res.send(order);
 };
+
+exports.getAllOrders = async (req, res, next) => {
+  const orders = await OrderModel.find().populate("products");
+
+  console.log(orders);
+
+  res.send(orders);
+};
