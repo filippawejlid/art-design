@@ -1,0 +1,111 @@
+@import "primevue/resources/themes/lara-light-blue/theme.css";
+@import "primevue/resources/primevue.min.css";
+@import "primeicons/primeicons.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Julius+Sans+One&family=Satisfy&display=swap");
+body {
+  background-image: url("../bg5.png");
+  margin: 0px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: $base-font;
+  box-sizing: border-box;
+}
+
+*:hover {
+  transition: 0.2s;
+}
+
+.main {
+  padding: 20px;
+  background-color: white;
+  box-shadow: 5px 0 5px -5px rgba(179, 179, 179, 0.7),
+    -5px 0 5px -5px rgba(181, 181, 181, 0.7);
+  @include flex(column, flex-start, center, 2rem);
+
+  @include tablet() {
+    margin: 0px 30px;
+  }
+  @include desktop() {
+    margin: 0px 100px;
+  }
+
+  @include desktop-xl() {
+    margin: 0px 200px;
+  }
+}
+
+.p-menubar {
+  border-radius: 0px;
+
+  .pi {
+    font-size: 1.5rem;
+  }
+
+  .pi-shopping-cart {
+    font-size: 1.1rem !important;
+    cursor: pointer;
+  }
+}
+
+.p-dialog-content {
+  padding: 1.5rem !important;
+}
+
+.p-dialog-footer {
+  padding: 1.5rem !important;
+  text-align: center !important;
+}
+
+.p-dialog {
+  width: 100vw !important;
+  @include tablet() {
+    width: 90vw !important;
+  }
+  @include desktop() {
+    width: 80vw !important;
+  }
+  @include desktop-xl() {
+    width: 40vw !important;
+  }
+}
+
+.cart-dialog {
+  @include tablet() {
+    width: 70vw !important;
+  }
+  @include desktop() {
+    width: 40vw !important;
+  }
+  @include desktop-xl() {
+    width: 28vw !important;
+  }
+}
+.p-button {
+  background: $base-brown;
+  border: 1px solid $darker-brown;
+
+  &:focus,
+  &:hover {
+    background: $darker-brown !important;
+    border: 1px solid white !important;
+  }
+}
+
+.p-toast-message {
+  background: white;
+  border: solid #fff !important;
+  border-width: 0 0 0 6px !important;
+  .p-toast-message-content {
+    background: $base-brown;
+    border: 1px solid $darker-brown;
+    .p-toast-summary {
+      color: white;
+    }
+    span {
+      color: white !important;
+    }
+  }
+}
