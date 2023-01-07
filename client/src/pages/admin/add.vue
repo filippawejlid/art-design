@@ -82,14 +82,17 @@ import Button from "primevue/button";
 import { required, email } from "@vuelidate/validators";
 import { reactive } from "vue";
 import { useVuelidate } from "@vuelidate/core";
+import useProductsQuery from "~/composables/queries/useProductsQuery";
+import { Product } from "~/models/Product";
 
+const { addProduct } = useProductsQuery();
 const state = reactive({
   product: {
     name: "",
     img: "",
-    price: undefined,
-    stock: undefined,
-    description: undefined,
+    price: 0,
+    stock: 0,
+    description: "",
   },
 });
 const rules = {
@@ -106,7 +109,18 @@ const v$ = useVuelidate(rules, state);
 const handleSubmit = async () => {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
-  console.log(state);
+  const product: Product = {
+    name: state.product.name,
+    img: "../../assets/bg2.png",
+    price: state.product.price,
+    stock: state.product.stock,
+    description: state.product.description,
+    _id: "",
+    quantity: 0,
+  };
+  addProduct.mutateAsync(product).then((data) => {
+    console.log(data);
+  });
 };
 </script>
 
