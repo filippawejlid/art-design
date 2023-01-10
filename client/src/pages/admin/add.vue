@@ -30,7 +30,8 @@
 
         <div class="field">
           <div class="p-float-label">
-            <InputText
+            <Textarea
+              rows="6"
               type="text"
               v-model="state.product.description"
               :hasError="v$.product.description.$error"
@@ -78,6 +79,8 @@
 
 <script setup lang="ts">
 import FileUpload from "primevue/fileupload";
+import Textarea from "primevue/textarea";
+
 import InputText from "primevue/inputtext";
 import InputNumber from "primevue/inputnumber";
 import Button from "primevue/button";
