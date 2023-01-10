@@ -39,9 +39,11 @@ exports.deleteProduct = async (req, res, next) => {
 };
 
 exports.addProduct = async (req, res, next) => {
+  console.log("img", req.body.img);
+
   const product = new ProductModel({
     name: req.body.name,
-    img: req.body.img,
+    img: req.body.fileImg,
     price: req.body.price,
     stock: req.body.stock,
     description: req.body.description,

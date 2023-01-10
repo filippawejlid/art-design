@@ -17,7 +17,7 @@
         @click="openProduct(product)"
       >
         <div class="img-container">
-          <img :src="product.img" alt="Bild av tavla" />
+          <img :src="product.img" :alt="`Bild av ${product.name}`" />
         </div>
         <div></div>
         <div class="info">

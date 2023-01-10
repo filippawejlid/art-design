@@ -48,10 +48,10 @@ const itemsMobile = [
 }
 
 .large {
-  visibility: hidden;
+  display: none;
 
   @include desktop() {
-    visibility: visible;
+    display: block;
   }
 }
 </style>

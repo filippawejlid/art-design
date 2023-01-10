@@ -3,13 +3,15 @@
     <div class="card">
       <form @submit.prevent="handleSubmit" class="p-fluid">
         <div class="field">
-          <FileUpload
+          <!-- <FileUpload
             mode="basic"
             name="demo[]"
             url="./upload"
             id="img"
             chooseLabel="Välj en bild"
-          />
+            ref="fileInput"
+          /> -->
+          <input type="file" ref="fileInput" />
         </div>
         <div class="field">
           <div class="p-float-label">
@@ -80,18 +82,19 @@ import InputText from "primevue/inputtext";
 import InputNumber from "primevue/inputnumber";
 import Button from "primevue/button";
 import { required, email } from "@vuelidate/validators";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import useProductsQuery from "~/composables/queries/useProductsQuery";
 import { Product } from "~/models/Product";
 
 const { addProduct } = useProductsQuery();
+const fileInput = ref();
 const state = reactive({
   product: {
     name: "",
-    img: "",
-    price: 0,
-    stock: 0,
+    img: fileInput,
+    price: undefined,
+    stock: undefined,
     description: "",
   },
 });
@@ -108,10 +111,13 @@ const v$ = useVuelidate(rules, state);
 
 const handleSubmit = async () => {
   const isValid = await v$.value.$validate();
+  console.log(fileInput.value.files[0]);
+  const file = fileInput.value.files[0];
   if (!isValid) return;
+
   const product: Product = {
     name: state.product.name,
-    img: "../../assets/bg2.png",
+    img: file,
     price: state.product.price,
     stock: state.product.stock,
     description: state.product.description,

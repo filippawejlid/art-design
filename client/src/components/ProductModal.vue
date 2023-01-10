@@ -2,7 +2,7 @@
   <div class="modal">
     <div class="content">
       <div class="img-container">
-        <img :src="product.img" alt="Bild på '{{product.name}}'" />
+        <img :src="product.img" :alt="`Bild av ${product.name}`" />
       </div>
       <div class="info-container">
         <div class="info">

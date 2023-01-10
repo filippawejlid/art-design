@@ -6,7 +6,7 @@
     :key="product._id"
   >
     <div class="img">
-      <img :src="product.img" alt="" />
+      <img :src="product.img" :alt="`Bild av ${product.name}`" />
     </div>
     <div class="container">
       <div class="info">
