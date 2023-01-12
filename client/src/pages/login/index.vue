@@ -4,12 +4,12 @@
       <div class="field">
         <div class="p-float-label">
           <InputText
-            id="name"
+            id="username"
             v-model="state.username"
             :hasError="v$.username.$error"
             :class="{ 'p-invalid': v$.username.$error }"
           />
-          <label for="name" :class="{ 'p-error': v$.username.$error }"
+          <label for="username" :class="{ 'p-error': v$.username.$error }"
             >Användarnamn*</label
           >
         </div>
@@ -17,13 +17,13 @@
       <div class="field">
         <div class="p-float-label">
           <InputText
-            id="lastName"
+            id="password"
             type="password"
             v-model="state.password"
             :hasError="v$.password.$error"
             :class="{ 'p-invalid': v$.password.$error }"
           />
-          <label for="lastName" :class="{ 'p-error': v$.password.$error }"
+          <label for="password" :class="{ 'p-error': v$.password.$error }"
             >Lösenord*</label
           >
         </div>

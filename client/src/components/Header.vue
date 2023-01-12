@@ -32,7 +32,7 @@
               }
             "
             label="Gå till kassan"
-            class="button"
+            class="button go-to-checkout"
           />
         </router-link>
       </div>

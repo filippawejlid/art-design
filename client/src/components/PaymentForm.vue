@@ -6,13 +6,13 @@
         <div class="field">
           <div class="p-float-label">
             <InputText
-              id="name"
+              id="firstName"
               v-model="state.customer.firstName"
               :hasError="v$.customer.firstName.$error"
               :class="{ 'p-invalid': v$.customer.firstName.$error }"
             />
             <label
-              for="name"
+              for="firstName"
               :class="{ 'p-error': v$.customer.firstName.$error }"
               >Förnamn*</label
             >
@@ -121,7 +121,7 @@
           >
         </div>
         <div class="button-container">
-          <Button type="submit" label="Betala" class="mt-2" />
+          <Button type="submit" label="Betala" class="mt-2 pay-button" />
         </div>
       </form>
     </div>
