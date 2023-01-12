@@ -1,17 +1,24 @@
 <template>
   <div class="add">
     <div class="card">
-      <form @submit.prevent="handleSubmit" class="p-fluid">
+      <form
+        @submit.prevent="handleSubmit"
+        class="p-fluid"
+        enctype="multipart/form-data"
+      >
         <div class="field">
           <!-- <FileUpload
             mode="basic"
             name="demo[]"
-            url="./upload"
-            id="img"
+            v-model="state.product.img"
             chooseLabel="Välj en bild"
+            url="http://localhost:8000/add-product"
             ref="fileInput"
+            @upload-change="handleUploadChange"
+            @upload-error="handleUploadError"
+            @upload-success="handleUploadSuccess"
           /> -->
-          <input type="file" ref="fileInput" />
+          <input type="file" @change="handleUploadChange" />
         </div>
         <div class="field">
           <div class="p-float-label">
@@ -89,15 +96,16 @@ import { reactive, ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import useProductsQuery from "~/composables/queries/useProductsQuery";
 import { Product } from "~/models/Product";
+import useApi from "~/services/useApi";
 
 const { addProduct } = useProductsQuery();
-const fileInput = ref();
+const file = ref();
 const state = reactive({
   product: {
     name: "",
-    img: fileInput,
-    price: undefined,
-    stock: undefined,
+    img: file.value,
+    price: 0,
+    stock: 0,
     description: "",
   },
 });
@@ -112,24 +120,45 @@ const rules = {
 
 const v$ = useVuelidate(rules, state);
 
+const handleUploadChange = (event: any) => {
+  console.log(event.target.files[0]);
+  file.value = event.target.files[0];
+};
+
 const handleSubmit = async () => {
   const isValid = await v$.value.$validate();
-  console.log(fileInput.value.files[0]);
-  const file = fileInput.value.files[0];
   if (!isValid) return;
 
   const product: Product = {
     name: state.product.name,
-    img: file,
+    img: file.value,
     price: state.product.price,
     stock: state.product.stock,
     description: state.product.description,
     _id: "",
     quantity: 0,
   };
-  addProduct.mutateAsync(product).then((data) => {
-    console.log(data);
-  });
+
+  const formData = new FormData();
+
+  formData.append("file", file.value);
+  formData.append("prod", product);
+  console.log(formData);
+
+  useApi()
+    .post("/admin/add-product", formData)
+    .then((data) => {
+      console.log(data);
+
+      state.product = {
+        name: "",
+        img: "",
+        price: 0,
+        stock: 0,
+        description: "",
+      };
+    });
+  // Reset the form
 };
 </script>
 

@@ -6,7 +6,6 @@ import { watchEffect } from "vue";
 const useProducts = () => {
   const productsStore = useProductsStore();
   const { data: products } = useProductsQuery();
-  console.log(products.value);
 
   watchEffect(() => {
     localStorage.setItem("products", JSON.stringify(products.value));

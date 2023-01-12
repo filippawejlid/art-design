@@ -27,12 +27,9 @@ export const useCartStore = defineStore("Cart", {
   actions: {
     addProduct(product: Product) {
       const found = this.cart.products.find((p) => p._id === product._id);
-      console.log(this.cart.products);
-      console.log(product);
 
       if (found) {
         found.quantity++;
-        console.log(found);
 
         const index = this.cart.products.findIndex((p) => p._id === found._id);
         this.cart.products.splice(index, 1, found);

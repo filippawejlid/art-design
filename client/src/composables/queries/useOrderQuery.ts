@@ -8,7 +8,6 @@ const useOrderQuery = (id?: string) => {
     return useApi()
       .get(`checkout/get-order/${id}`)
       .then((res) => {
-        console.log(res.data, "hej");
         return new Order(res.data);
       });
   };
@@ -16,7 +15,6 @@ const useOrderQuery = (id?: string) => {
     return useApi()
       .get(`checkout/get-all-orders`)
       .then((res) => {
-        console.log("alla ordrar", res.data);
         return res.data.map((p: Order) => new Order(p)) ?? [];
       });
   };

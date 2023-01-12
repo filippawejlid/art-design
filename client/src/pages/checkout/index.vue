@@ -55,7 +55,6 @@ const sendOrder = (customer: Customer) => {
 
   postOrder.mutateAsync(order).then((data) => {
     cartStore.emptyCart();
-    console.log("data", data);
     router.push(`/checkout/${data.data._id}/confirmation`);
   });
 };

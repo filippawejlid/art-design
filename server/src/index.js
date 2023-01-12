@@ -34,9 +34,7 @@ app.use("/", startRoutes);
 app.use("/products", productsRoute);
 app.use("/checkout", checkoutRoute);
 app.use("/admin", adminRoute);
-app.get("/", async (req, res) => {
-  console.log("hallå");
-});
+app.get("/", async (req, res) => {});
 
 app.listen(port || 8000, () => {
   console.log(`http://localhost:${port}`);

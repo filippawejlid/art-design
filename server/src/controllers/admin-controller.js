@@ -1,7 +1,6 @@
 const ProductModel = require("../../models/ProductModel");
 
 exports.getIsAdmin = async (req, res, next) => {
-  console.log(req.body);
   const user = {
     username: req.body.username,
     password: req.body.password,
@@ -39,16 +38,17 @@ exports.deleteProduct = async (req, res, next) => {
 };
 
 exports.addProduct = async (req, res, next) => {
-  console.log("img", req.body.img);
+  console.log("body", req.body);
 
   const product = new ProductModel({
     name: req.body.name,
-    img: req.body.fileImg,
+    img: req.body.img,
     price: req.body.price,
     stock: req.body.stock,
     description: req.body.description,
   });
+  console.log("product", product);
 
-  await product.save();
-  res.send(product);
+  // await product.save();
+  // res.send(product);
 };

@@ -28,15 +28,9 @@ const { params } = useRoute();
 
 const orderId = params._id;
 
-console.log(orderId.toLocaleString());
-
 const { data: order } = useOrderQuery(orderId.toLocaleString());
 
 const confirmationOrder = computed(() => order.value);
-
-watch(confirmationOrder, (c, o) => {
-  console.log(c?.products);
-});
 </script>
 
 <style scoped lang="scss">
