@@ -17,7 +17,10 @@
         @click="openProduct(product)"
       >
         <div class="img-container">
-          <img :src="product.img" :alt="`Bild av ${product.name}`" />
+          <img
+            :src="'../../../../images/' + product.img"
+            :alt="`Bild av ${product.name}`"
+          />
         </div>
         <div></div>
         <div class="info">
@@ -65,6 +68,10 @@ const products = computed(() => productsStore.getProducts);
 let display = ref(false);
 
 const displayProduct = ref(new Product());
+
+const getImgUrl = (imgName: string) => {
+  return "../../../../images/" + imgName;
+};
 
 const openProduct = (product: Product) => {
   displayProduct.value = product;

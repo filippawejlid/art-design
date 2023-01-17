@@ -6,19 +6,24 @@
         class="p-fluid"
         enctype="multipart/form-data"
       >
-        <div class="field">
+        <div class="field file-field">
           <!-- <FileUpload
             mode="basic"
             name="demo[]"
-            v-model="state.product.img"
             chooseLabel="Välj en bild"
-            url="http://localhost:8000/add-product"
+
             ref="fileInput"
             @upload-change="handleUploadChange"
-            @upload-error="handleUploadError"
-            @upload-success="handleUploadSuccess"
+
           /> -->
-          <input type="file" @change="handleUploadChange" />
+          <span class="message">{{ message }}</span>
+          <input
+            id="file"
+            type="file"
+            @change="handleUploadChange"
+            class="file-input"
+          />
+          <label for="file">Välj en bild</label>
         </div>
         <div class="field">
           <div class="p-float-label">
@@ -92,18 +97,24 @@ import InputText from "primevue/inputtext";
 import InputNumber from "primevue/inputnumber";
 import Button from "primevue/button";
 import { required, email } from "@vuelidate/validators";
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import useProductsQuery from "~/composables/queries/useProductsQuery";
 import { Product } from "~/models/Product";
 import useApi from "~/services/useApi";
 
-const { addProduct } = useProductsQuery();
+const message = computed(() => {
+  if (!file.value) {
+    return "Du måste välja en bild";
+  } else {
+    return "";
+  }
+});
 const file = ref();
 const state = reactive({
   product: {
     name: "",
-    img: file.value,
+    img: undefined,
     price: 0,
     stock: 0,
     description: "",
@@ -112,6 +123,7 @@ const state = reactive({
 const rules = {
   product: {
     name: { required },
+    img: { required },
     price: { required },
     stock: { required },
     description: { required },
@@ -142,21 +154,16 @@ const handleSubmit = async () => {
   const formData = new FormData();
 
   formData.append("file", file.value);
-  formData.append("prod", product);
+  formData.append("name", product.name);
+  formData.append("description", product.description);
+  formData.append("price", product.price.toString());
+  formData.append("stock", product.stock.toString());
   console.log(formData);
 
   useApi()
-    .post("/admin/add-product", formData)
+    .post("/add-product", formData)
     .then((data) => {
       console.log(data);
-
-      state.product = {
-        name: "",
-        img: "",
-        price: 0,
-        stock: 0,
-        description: "",
-      };
     });
   // Reset the form
 };
@@ -183,10 +190,48 @@ const handleSubmit = async () => {
       .img-label {
         font-size: 12px;
       }
+
+      .file-input {
+        border: none;
+        outline: none;
+      }
+    }
+    .file-field {
+      @include flex(column, center, center);
     }
     form {
       margin-top: 2rem;
     }
+  }
+}
+
+.message {
+  display: inline !important;
+  font-size: 0.8rem;
+  margin: 10px 0px;
+  color: #e24c4c;
+}
+
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+[type="file"] + label {
+  background: $base-brown;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: all 0.3s;
+  padding: 10px 18px;
+
+  &:hover {
+    background-color: darken($base-brown, 10%);
   }
 }
 

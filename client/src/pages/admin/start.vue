@@ -4,7 +4,10 @@
     <div class="products">
       <div class="product" v-for="prod in products" :key="prod._id">
         <div class="img">
-          <img :src="prod.img" :alt="`Bild av ${prod.name}`" />
+          <img
+            :src="`../../../../images/${prod.img}`"
+            :alt="`Bild av ${prod.name}`"
+          />
         </div>
         <div class="info">
           <div class="name">
