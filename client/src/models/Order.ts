@@ -24,8 +24,6 @@ export const setQuantity = (products?: Product[]) => {
       element.quantity = 1;
       unique.push(element);
     } else {
-      console.log("är vi här");
-
       const foundE = unique.find((e) => e._id === element._id);
       if (!foundE) return;
       element.quantity = foundE?.quantity + 1;
@@ -33,7 +31,6 @@ export const setQuantity = (products?: Product[]) => {
       unique.splice(i, 1, element);
     }
   });
-  console.log(unique);
 
   return unique;
 };

@@ -24,7 +24,16 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   const userStore = useUserStore();
-  if (!userStore.isAdmin && to.name === "admin") {
+  if (!userStore.isAdmin && to.name === "admin-start") {
+    return "/";
+  }
+  if (!userStore.isAdmin && to.name === "admin-edit") {
+    return "/";
+  }
+  if (!userStore.isAdmin && to.name === "admin-add") {
+    return "/";
+  }
+  if (!userStore.isAdmin && to.name === "admin-orders") {
     return "/";
   }
 });

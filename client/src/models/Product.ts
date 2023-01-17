@@ -4,6 +4,7 @@ export class Product {
   name: string;
   _id: string;
   img: string;
+  fileImg?: File;
   price: number;
   stock: number;
   quantity: number;
@@ -17,5 +18,6 @@ export class Product {
     this.stock = resp?.stock ?? 0;
     this.quantity = 1;
     this.description = resp?.description ?? "";
+    this.fileImg = new File([], "");
   }
 }

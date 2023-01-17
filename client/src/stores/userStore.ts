@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-
+import { useStorage } from "@vueuse/core";
 export const useUserStore = defineStore("User", {
   state: () => {
     return {
-      isAdmin: false,
+      isAdmin: useStorage("isAdmin", false),
     };
   },
   getters: {

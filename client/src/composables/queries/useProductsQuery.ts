@@ -9,8 +9,6 @@ const useProductsQuery = () => {
     return useApi()
       .get(`products/getproducts`)
       .then((res) => {
-        console.log(res.data);
-
         return res.data.map((p: Product) => new Product(p)) ?? [];
       });
   };

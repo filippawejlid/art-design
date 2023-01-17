@@ -1,16 +1,30 @@
 <template>
-  <div class="products">
-    <div class="product" v-for="product in products" :key="product._id">
-      <InputText v-model="product.name"></InputText>
-      <InputNumber v-model="product.price"></InputNumber>
-      <InputNumber v-model="product.stock"></InputNumber>
-      <Textarea v-model="product.description" rows="6" cols="40" />
-      <Button label="Spara ändringar" @click="edit(product._id)"></Button>
-      <Button
-        label="Radera"
-        icon="pi pi-trash"
-        @click="delProduct(product._id)"
-      ></Button>
+  <div class="edit">
+    <div class="products">
+      <div class="product" v-for="product in products" :key="product._id">
+        <div class="field">
+          <InputText v-model="product.name"></InputText>
+        </div>
+
+        <div class="field">
+          <InputNumber v-model="product.price"></InputNumber>
+        </div>
+
+        <div class="field">
+          <InputNumber v-model="product.stock"></InputNumber>
+        </div>
+        <div class="field">
+          <Textarea v-model="product.description" rows="6" cols="35" />
+        </div>
+        <div class="buttons">
+          <Button label="Spara" @click="edit(product._id)"></Button>
+          <Button
+            label="Radera"
+            icon="pi pi-trash"
+            @click="delProduct(product._id)"
+          ></Button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -43,7 +57,35 @@ const delProduct = (id: string) => {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.edit {
+  padding: 30px;
+  margin: 10px;
+  .products {
+    @include flex(column, center, center, 3rem);
+
+    @include tablet() {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .product {
+      background-color: white;
+      padding: 30px;
+      .field {
+        margin-bottom: 1.5rem;
+        @include flex(row, center, center);
+
+        * {
+          width: 250px;
+        }
+      }
+      .buttons {
+        @include flex(row, space-between, center);
+      }
+    }
+  }
+}
+</style>
 <route lang="yaml">
 meta:
   layout: adminLayout

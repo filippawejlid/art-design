@@ -42,15 +42,11 @@ exports.postOrder = async (req, res, next) => {
 exports.getOrder = async (req, res, next) => {
   const order = await OrderModel.findById(req.params.id).populate("products");
 
-  console.log(order);
-
   res.send(order);
 };
 
 exports.getAllOrders = async (req, res, next) => {
   const orders = await OrderModel.find().populate("products");
-
-  console.log(orders);
 
   res.send(orders);
 };
