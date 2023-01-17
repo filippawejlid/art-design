@@ -24,4 +24,30 @@ describe("it tests user purchase", () => {
     cy.get(".p-tabmenuitem:nth-of-type(5)").click();
     cy.url().should("not.include", "/admin");
   });
+
+  it("gets products on startpage", () => {
+    cy.visit("http://127.0.0.1:5173/login");
+    cy.get("#username").type("DianaB");
+    cy.get("#password").type("hej123");
+    cy.get(".p-button").click();
+    cy.get(".products > :nth-child(1)").should("exist");
+  });
+
+  it("gets products on edit", () => {
+    cy.visit("http://127.0.0.1:5173/login");
+    cy.get("#username").type("DianaB");
+    cy.get("#password").type("hej123");
+    cy.get(".p-button").click();
+    cy.get(".p-tabmenuitem:nth-of-type(2)").click();
+    cy.get(".products > :nth-child(1)").should("exist");
+  });
+
+  it("gets orders on view orders", () => {
+    cy.visit("http://127.0.0.1:5173/login");
+    cy.get("#username").type("DianaB");
+    cy.get("#password").type("hej123");
+    cy.get(".p-button").click();
+    cy.get(".p-tabmenuitem:nth-of-type(4)").click();
+    cy.get(".orders > :nth-child(1)").should("exist");
+  });
 });
