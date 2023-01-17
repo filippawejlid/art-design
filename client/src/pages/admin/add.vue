@@ -199,9 +199,6 @@ const handleSubmit = async () => {
     .file-field {
       @include flex(column, center, center);
     }
-    form {
-      margin-top: 2rem;
-    }
   }
 }
 
