@@ -24,7 +24,6 @@
   position: relative;
   background-color: white;
   padding: 30px;
-  // margin-top: 30px;
   @include flex(column, center, center, 2rem);
   &-text {
     font-family: $secondary-font;

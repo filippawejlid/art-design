@@ -20,7 +20,7 @@ const useProductsQuery = () => {
 
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("products"); // här invaliderar vi queryn så den hämtar om
+        queryClient.invalidateQueries("products");
       },
     }
   );
@@ -31,7 +31,7 @@ const useProductsQuery = () => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("products"); // här invaliderar vi queryn så den hämtar om
+        queryClient.invalidateQueries("products");
       },
     }
   );
@@ -43,7 +43,7 @@ const useProductsQuery = () => {
 
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("products"); // här invaliderar vi queryn så den hämtar om
+        queryClient.invalidateQueries("products");
       },
     }
   );

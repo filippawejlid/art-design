@@ -34,7 +34,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post("/add-product", upload.single("file"), async (req, res) => {
-  console.log("body", req.body);
   const product = new ProductModel({
     name: req.body.name,
     img: req.file.filename,
@@ -42,7 +41,6 @@ app.post("/add-product", upload.single("file"), async (req, res) => {
     stock: +req.body.stock,
     description: req.body.description,
   });
-  console.log("product", product);
 
   await product.save();
   res.send(product);

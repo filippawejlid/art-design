@@ -97,7 +97,7 @@ import InputText from "primevue/inputtext";
 import InputNumber from "primevue/inputnumber";
 import Button from "primevue/button";
 import { required, email } from "@vuelidate/validators";
-import { computed, reactive, ref } from "vue";
+import { computed, nextTick, reactive, ref } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import useProductsQuery from "~/composables/queries/useProductsQuery";
 import { Product } from "~/models/Product";
@@ -133,15 +133,12 @@ const rules = {
 const v$ = useVuelidate(rules, state);
 
 const handleUploadChange = (event: any) => {
-  console.log(event.target.files[0]);
   file.value = event.target.files[0];
   state.product.img = file.value;
 };
 
 const handleSubmit = async () => {
   const isValid = await v$.value.$validate();
-  console.log("halå");
-  console.log(isValid);
 
   if (!isValid) return;
 
@@ -162,14 +159,19 @@ const handleSubmit = async () => {
   formData.append("description", product.description);
   formData.append("price", product.price.toString());
   formData.append("stock", product.stock.toString());
-  console.log(formData);
 
   useApi()
     .post("/add-product", formData)
-    .then((data) => {
-      console.log(data);
+    .then(() => {
+      state.product = {
+        name: "",
+        img: undefined,
+        price: 0,
+        stock: 0,
+        description: "",
+      };
+      v$.value.$reset();
     });
-  // Reset the form
 };
 </script>
 

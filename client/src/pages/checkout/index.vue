@@ -66,12 +66,6 @@ const sendOrder = (customer: Customer) => {
     flex-direction: row;
     align-items: flex-start;
   }
-  // @include desktop-xl() {
-  //   margin: 0px 150px;
-  // }
-  // @include desktop-xxl() {
-  //   margin: 0px 350px;
-  // }
 
   .cart {
     border-radius: 5px;
@@ -100,7 +94,6 @@ const sendOrder = (customer: Customer) => {
       }
       .order-item {
         @include flex(row, space-between, center, 1rem);
-        // width: 70%;
 
         .price {
         }
@@ -117,6 +110,5 @@ const sendOrder = (customer: Customer) => {
 :deep(.product) {
   padding: 20px 0px;
   border-bottom: 1px solid rgba(211, 211, 211, 0.774);
-  //   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
 }
 </style>
