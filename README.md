@@ -4,9 +4,9 @@
 
 ### These values are required in .env file
 
-CONNECTION_STRING
-PORT
-ADMINUSERNAME
+CONNECTION_STRING,
+PORT,
+ADMINUSERNAME,
 ADMINPASSWORD
 
 ## Img src is currently not working because of bug and images cannot be viewed
