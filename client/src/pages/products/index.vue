@@ -18,11 +18,10 @@
       >
         <div class="img-container">
           <img
-            :src="'../../../../images/' + product.img"
+            :src="`../../../../images/${product.img}`"
             :alt="`Bild av ${product.name}`"
           />
         </div>
-        <div></div>
         <div class="info">
           <p class="name">{{ product.name }}</p>
           <p class="price">{{ product.price }}kr</p>

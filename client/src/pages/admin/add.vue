@@ -135,10 +135,14 @@ const v$ = useVuelidate(rules, state);
 const handleUploadChange = (event: any) => {
   console.log(event.target.files[0]);
   file.value = event.target.files[0];
+  state.product.img = file.value;
 };
 
 const handleSubmit = async () => {
   const isValid = await v$.value.$validate();
+  console.log("halå");
+  console.log(isValid);
+
   if (!isValid) return;
 
   const product: Product = {
@@ -172,7 +176,7 @@ const handleSubmit = async () => {
 <style lang="scss" scoped>
 .add {
   height: 90vh;
-  @include flex(row, center, center);
+  @include flex(row, center, flex-start);
 
   .card {
     * {
@@ -183,7 +187,7 @@ const handleSubmit = async () => {
     padding: 50px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
       rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-
+    margin-top: 14px;
     .field {
       margin-bottom: 1.5rem;
 
