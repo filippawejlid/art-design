@@ -25,7 +25,7 @@ exports.postOrder = async (req, res, next) => {
     text:
       "Hej " +
       req.body.customer.firstName +
-      "! Vi har tagit emot din order och har påbörjat behandling av din beställning. Du kommer få ett mail med fler detaljer när din order är redo att hämtas. Vid övriga frågor ber vi dig kontakta oss på denna mail.",
+      "! Vi har tagit emot din order och har påbörjat behandling av din beställning. Du kommer få ett mail med fler detaljer när din order är redo att hämtas. Vid övriga frågor ber vi dig kontakta oss på denna mail. Med vänliga hälsningar Art and Design",
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
