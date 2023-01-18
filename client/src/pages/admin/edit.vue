@@ -54,6 +54,8 @@ const edit = (id: string) => {
 };
 const delProduct = (id: string) => {
   deleteProduct.mutateAsync(id).then(() => {});
+  const index = products.value.findIndex((p) => p._id === id);
+  productsStore.deleteProduct(index);
 };
 </script>
 

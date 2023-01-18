@@ -20,5 +20,8 @@ export const useProductsStore = defineStore("Product", {
     setProducts(products?: Product[]) {
       this.products = products;
     },
+    deleteProduct(index: number) {
+      this.products?.splice(index, 1);
+    },
   },
 });
