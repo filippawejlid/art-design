@@ -94,9 +94,6 @@ const sendOrder = (customer: Customer) => {
       }
       .order-item {
         @include flex(row, space-between, center, 1rem);
-
-        .price {
-        }
       }
 
       .sum {
